@@ -40,10 +40,10 @@ async def detect_cars_return_img(file: bytes = File(...)):
     IMAGE_H, IMAGE_W = input_image_np.shape[:2]
     
     points = np.array([
-        [1000, IMAGE_H],              # Bottom Left
-        [1200, 400],                # Top Left 
-        [1850, 400],                # Top Right
-        [2250, IMAGE_H]             # Bottom Right
+        [0, IMAGE_H],                # Top Left 
+        [IMAGE_W, IMAGE_H],                # Top Right
+        [IMAGE_W, 0],            # Bottom Right
+        [0, 0],            # Bottom Left
     ])
 
     transformer_cam = BirdViewTransformer(
