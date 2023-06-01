@@ -5,6 +5,8 @@ import math
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 
+COUNTER = 0
+
 
 class BirdViewTransformer:
     
@@ -24,9 +26,9 @@ class BirdViewTransformer:
 
         # Define bounding box shapes for each class(longer side is vertical)
         self.box_shapes = {
-            'car': [145, 200],  
-            'truck': [150, 275],
-            'bus': [150, 275]
+            'car': [135, 200],  
+            'truck': [140, 275],
+            'bus': [140, 275]
         }
         # Define bounding box colors for each class
         self.box_color = {
@@ -708,7 +710,7 @@ class BirdViewTransformer:
                 ]
         
         # Update present ids and count amount of unique ids
-        self.counter = len(self.analyze().id_present)
+        COUNTER += len(self.analyze().id_present)
 
         # Return image with normalized bounding boxes
         return image_normalized   

@@ -6,7 +6,7 @@ import cv2
 import pandas as pd
 import numpy as np
 
-from BirdViewTransformer import BirdViewTransformer
+from BirdViewTransformer import BirdViewTransformer, COUNTER
 
 model = YOLO("yolov8m.pt")
 
@@ -61,7 +61,9 @@ async def detect_cars_return_img(file: bytes = File(...)):
     print(f'⛳️ Transformed img shapes: {image_normalized.shape}')
     print(transformer_cam.bb_centres_transformed_curr)
 
-
+    # Add to JSON responce
+    # COUNTER
+    
     success, bird_view_encoded = cv2.imencode('.jpg', image_normalized)
     bird_view_bytes = bird_view_encoded.tobytes()
     
