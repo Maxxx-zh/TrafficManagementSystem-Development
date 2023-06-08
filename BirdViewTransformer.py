@@ -691,7 +691,7 @@ class BirdViewTransformer:
             for id 
             in self.common_objects.keys()
             ]
-
+        
         # Build an image with normalized bounding boxes
         for centre, angle, label in zip(self.centres_curr, self.angles_normalized, labels_curr):
             print('🛠️ Plotting Bounding Box')
@@ -703,10 +703,18 @@ class BirdViewTransformer:
                 )
             
         # Define top and bottom borders for a count region
+        border_top = int(self.background.shape[0] * 0.2)
+        border_bottom = int(self.background.shape[0] * 0.25)
+
+        # Draw top and bottom border lines on the background image
+        cv2.line(self.background, (0, border_top), (self.background.shape[1], border_top), (255, 0, 0), 2)
+        cv2.line(self.background, (0, border_bottom), (self.background.shape[1], border_bottom), (255, 0, 0), 2)
+           
+        # Set up the analyze region
         if not hasattr(self, 'analyze_region'):
             self.analyze_region = [
-                image_normalized.shape[0] * 0.2,
-                image_normalized.shape[0] * 0.5,
+                border_top,
+                border_bottom,
                 ]
         
         # Update present ids and count amount of unique ids
